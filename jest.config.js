@@ -1,6 +1,6 @@
 const { resolve } = require('path')
 
-// Diretorio raiz da aplicacao
+// Dir raiz da aplicacao
 const root = resolve(__dirname);
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
     preset: 'ts-jest',
     moduleNameMapper: { 
         '@src/(.*)': '<rootDir>/src/$1',
-        '@test/(.*)': '<rootDir>/src/$1'
+        '@test/(.*)': '<rootDir>/test/$1'
     },
 
 };
