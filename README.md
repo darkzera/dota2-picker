@@ -12,7 +12,7 @@
 
 
 
-## What i may review
+## Steps with notes that i may review
 - Setup a tsc project 
     -> point correctly output and root dir
 
@@ -24,6 +24,7 @@
     5 -> Normalizaçao de dados captados na API dota: definicao json de resposta (em arquivo separado test/fixtures/***.json) 
     6 -> Validaçao com <Partial>  * vi nada
     7 -> Mocker 
+    8 -> Extensao testes: construcao de novos testes em OpenDota.ts <-> opendota.test
 
 
     *1/3: Setup do jest p/ subir, sozinho, o checker em cima dos arquivos TYPESCRIPT, ou seja, ele nao le os arquivos compilados, e sim os Typescripts. Antes do transpile [ ´testMatch´  ] 
@@ -33,5 +34,8 @@
 
     *7: 
         - const mockedAxios = axios as jest.Mocked<typeof axios>; /clients/
+
+
+    *8: 
 
 
