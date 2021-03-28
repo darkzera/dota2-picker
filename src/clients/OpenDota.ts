@@ -1,5 +1,6 @@
-import { AxiosStatic } from "axios";
+import * as HTTPUtil from "@src/util/request"
 import { InternalError } from "@src/util/errors/internal-error";
+import config, { IConfig } from 'config'
 
 // Interfaces
 export interface Heroes {
@@ -21,7 +22,7 @@ export interface NormalizedHeroes {
     roles: string[]
 }
 
-// error handle
+// error handle classes
 export class ClientRequestError extends InternalError {
     constructor(message: string) {
         const internalMessage =
@@ -37,30 +38,39 @@ export class ClientResponseError extends InternalError {
     }
 }
 
+// Configuracao p variavel 
+// ./config/default.json
+const openApiResourceConfig: IConfig = config.get('App.resources.OpenDota');
+
 export class OpenDota {
-    constructor(protected request: AxiosStatic) { }
+    constructor(protected request = new HTTPUtil.Request()) { }
 
     // #4
     public async try(): Promise<NormalizedHeroes[]> {
-        const url = 'https://api.opendota.com/api/heroes'
+        const url = `${openApiResourceConfig.get('apiUrl')}heroes`;
+
+        
         try {
             const objResponse = await this.request.get<Hero, Hero[]>(url, {
                 headers: {
-                    Authorization: 'fake-token'
+                    Authorization: openApiResourceConfig.get('apiToken')
                 }
             });
+
             // Cast to array
-            const herois = Object.values(objResponse);
+            const herois = Object.values(objResponse.data);
             // Above casting its resulting an last position with null values - finalFormat[length] = NULL VALUES
             // Must check .normalizeData() to verify why its LOOP one extra position
             const finalFormat = this.normalizeData(herois)
             // -> So decided to .pop() and remove the last position before return it 
             finalFormat.pop();
+            
             return finalFormat;
 
         } catch (err) {
-            if (err.response && err.response.status){ 
-                throw new ClientResponseError(`Error: ${JSON.stringify(err.response.data)} Code: ${err.response.status}`)
+            if (HTTPUtil.Request.isReqError(err)){
+                throw new ClientResponseError(`Error: ${JSON.stringify(err.response.data)} Code: ${err.response.status}`
+                )
             }
             throw new ClientRequestError(err.message);
         }
@@ -77,20 +87,7 @@ export class OpenDota {
                 primary_attr: hero.primary_attr,
                 roles: hero.roles
             })));
-
-
         return finalHero;
-
-
-        //     const finalHero2: NormalizedHeroes[] =
-        //         dataResponse.filter(this.isValid.bind(this))
-        //             .map((hero => ({
-        //                 id: hero.id,
-        //                 name: hero.localized_name,
-        //                 primary_attr: hero.primary_attr,
-        //                 roles: hero.roles
-        //             })));
-
     }
 
 

@@ -16,7 +16,7 @@
 - Setup a tsc project 
     -> point correctly output and root dir
 
-- Jest setup testing
+- Jest setup / testing
     1 -> Setup do jest com suas peculiaridades (implementando novos tipos inline etc): ver cmments
     2 -> Teste funcional: Operacional 
     3 -> Testes de unidade p. cada 
@@ -25,6 +25,7 @@
     6 -> Validaçao com <Partial>  * vi nada
     7 -> Mocker 
     8 -> Extensao testes: construcao de novos testes em OpenDota.ts <-> opendota.test
+    9 -> Settando Errors personalizados pra falhas na unidade de Cliente (comunicaçao com a API externa - OpenDota)
 
 
     *1/3: Setup do jest p/ subir, sozinho, o checker em cima dos arquivos TYPESCRIPT, ou seja, ele nao le os arquivos compilados, e sim os Typescripts. Antes do transpile [ ´testMatch´  ] 
@@ -35,7 +36,15 @@
     *7: 
         - const mockedAxios = axios as jest.Mocked<typeof axios>; /clients/
 
+    *9.1: Escondendo o Axios calls na estrutura
+        - Axios.get --> HTTUtil.get
+        - Usar class x instancia
+            // Static call
+            const mockedRequestClass = HTTPUtil.Request as jest.Mocked<typeof HTTPUtil.Request>;
+            // Instance call
+            const mockedRequest = new HTTPUtil.Request() as jest.Mocked<HTTPUtil.Request>;
 
-    *8: 
-
-
+- NEXT ONE()
+    1 -> 
+    2 -> 
+    3 -> 

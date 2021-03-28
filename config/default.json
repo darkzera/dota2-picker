@@ -1,0 +1,10 @@
+{
+    "App": {
+        "resources": {
+            "OpenDota": {
+                "apiUrl": "https://api.opendota.com/api/",
+                "apiToken": "do-not-disturb"
+            }
+        }
+    }
+}
