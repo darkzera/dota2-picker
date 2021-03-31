@@ -1,4 +1,5 @@
 import * as HTTPUtil from "@src/util/request"
+import config, { IConfig } from "config";
 
 export interface Movie {
     adult: false,
@@ -39,14 +40,14 @@ export interface NormalizedMovie {
     title: string, 
     video: boolean,
 }
+const APIconfigResource: IConfig = config.get('App.resources.movieFlix')
 export class MoviesFlix {
     constructor(protected request = new HTTPUtil.Request) {}
 
 
     public async fetchByName(name: string): Promise<NormalizedMovie[]>{
-        const url = 'https://api.themoviedb.org/3/search/movie?query=matrix'
-        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ODEwY2Y0NjliZjkxNmY4NDNjN2NjZDJjM2IyZWJhZSIsInN1YiI6IjYwNjM3MWJiMTEzMGJkMDAzZTU5MDc4ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-uxsdZMYQYfq_n3S7oJhBjthTUv68M2Hv1xFZH3TqW4';
-        
+        const token =`${APIconfigResource.get('apiToken')}`;
+        const url = `${APIconfigResource.get('apiUrl')}3/search/movie?query=${name}`;
         const response = await this.request.getMovies<NetFloxReponse>(url, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -55,6 +56,8 @@ export class MoviesFlix {
         const movies = this.normalizeData(response.data.results);
         return movies;
     }
+
+
     private normalizeData(moviesUnmastered: Movie[]): NormalizedMovie[] {
         const normalized: NormalizedMovie[] =
             moviesUnmastered.map((mov => ({
