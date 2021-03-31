@@ -48,24 +48,22 @@ export class OpenDota {
     // #4
     public async try(): Promise<NormalizedHeroes[]> {
         const url = `${openApiResourceConfig.get('apiUrl')}heroes`;
-
-        
         try {
             const objResponse = await this.request.get<Hero, Hero[]>(url, {
                 headers: {
                     Authorization: openApiResourceConfig.get('apiToken')
                 }
             });
-
-            // Cast to array
+            // Cast to array because I cannot deal with this fucking object
             const herois = Object.values(objResponse.data);
             // Above casting its resulting an last position with null values - finalFormat[length] = NULL VALUES
             // Must check .normalizeData() to verify why its LOOP one extra position
             const finalFormat = this.normalizeData(herois)
             // -> So decided to .pop() and remove the last position before return it 
+            console.log(" - ", typeof(finalFormat[0]));
             finalFormat.pop();
-            
-            return finalFormat;
+            // return finalFormat;
+            return this.normalizeData(herois);
 
         } catch (err) {
             if (HTTPUtil.Request.isReqError(err)){
@@ -87,6 +85,7 @@ export class OpenDota {
                 primary_attr: hero.primary_attr,
                 roles: hero.roles
             })));
+            finalHero.pop();
         return finalHero;
     }
 

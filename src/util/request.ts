@@ -8,6 +8,7 @@ export interface Response<T = any> extends AxiosResponse<T>{}
 export class Request {
     constructor(private request = axios){ }
 
+    // Usage for OPENAPI DOTA
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public get<T = any, R = AxiosResponse<T>>(url: string, config: RequestConfig = {}): Promise<Response<T>> {
         const rt = this.request.get<T, Response<T>>(url, config);
@@ -20,6 +21,13 @@ export class Request {
         // false: no reach at external API
         // NOT SURE ABOUT lol
         return !!(error.response && error.response.status)
+    }
+
+
+    // Usage for new external service (IMDB WTF)
+
+    public getMovies<T = any>(url: string, config: RequestConfig = {}): Promise<Response<T>> {
+        return this.request.get<T, Response<T>>(url, config);
     }
 
 }

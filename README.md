@@ -17,34 +17,32 @@
     -> point correctly output and root dir
 
 - Jest setup / testing
-    1 -> Setup do jest com suas peculiaridades (implementando novos tipos inline etc): ver cmments
-    2 -> Teste funcional: Operacional 
-    3 -> Testes de unidade p. cada 
-    4 -> Receber e trabalhar com os dados em (Object) da  API
-    5 -> Normalizaçao de dados captados na API dota: definicao json de resposta (em arquivo separado test/fixtures/***.json) 
-    6 -> Validaçao com <Partial>  * vi nada
-    7 -> Mocker 
-    8 -> Extensao testes: construcao de novos testes em OpenDota.ts <-> opendota.test
-    9 -> Settando Errors personalizados pra falhas na unidade de Cliente (comunicaçao com a API externa - OpenDota)
+  - 1  Setup do jest com suas peculiaridades (implementando novos tipos inline etc): ver cmments
+  - 2  Teste funcional: Operacional 
+  - 3  Testes de unidade p. cada 
+  - 4  Receber e trabalhar com os dados em (Object) da  API
+  - 5  Normalizaçao de dados captados na API dota: definicao json de resposta (em arquivo separado test/fixtures/***.json) 
+  - 6  Validaçao com <Partial>  * vi nada
+  - 7  Mocker 
+  - 8  Extensao testes: construcao de novos testes em OpenDota.ts <-> opendota.test
+  - 9  Settando Errors personalizados pra falhas na unidade de Cliente (comunicaçao com a API externa - OpenDota)
 
 
-    *1/3: Setup do jest p/ subir, sozinho, o checker em cima dos arquivos TYPESCRIPT, ou seja, ele nao le os arquivos compilados, e sim os Typescripts. Antes do transpile [ ´testMatch´  ] 
+* 1/3: Setup do jest p/ subir, sozinho, o checker em cima dos arquivos TYPESCRIPT, ou seja, ele nao le os arquivos compilados, e sim os Typescripts. Antes do transpile [ ´testMatch´  ] 
 
-    *4: - precisei castar pra um array e aí sim acessar/manipular os dados
-        - const objResponse = await this.request.get<Hero, Hero[]>(url); /clients/__test__/openDota.test.ts
+ * 4: - precisei castar pra um array e aí sim acessar/manipular os dados
+>
+     const objResponse = await this.request.get<Hero, Hero[]>(url); /clients/__test__/openDota.test.ts
 
-    *7: 
+* 7: 
         - const mockedAxios = axios as jest.Mocked<typeof axios>; /clients/
 
-    *9.1: Escondendo o Axios calls na estrutura
-        - Axios.get --> HTTUtil.get
-        - Usar class x instancia
+* 9/1: Escondendo o Axios calls na estrutura
+    * Axios.get --> HTTUtil.get
+    * Usar class x instancia **    
+> 
             // Static call
             const mockedRequestClass = HTTPUtil.Request as jest.Mocked<typeof HTTPUtil.Request>;
             // Instance call
             const mockedRequest = new HTTPUtil.Request() as jest.Mocked<HTTPUtil.Request>;
 
-- NEXT ONE()
-    1 -> 
-    2 -> 
-    3 -> 
