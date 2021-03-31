@@ -4,6 +4,10 @@
             "OpenDota": {
                 "apiUrl": "https://api.opendota.com/api/",
                 "apiToken": "do-not-disturb"
+            },
+            "movieFlix": { 
+                "apiUrl": "https://api.themoviedb.org/",
+                "apiToken": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ODEwY2Y0NjliZjkxNmY4NDNjN2NjZDJjM2IyZWJhZSIsInN1YiI6IjYwNjM3MWJiMTEzMGJkMDAzZTU5MDc4ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-uxsdZMYQYfq_n3S7oJhBjthTUv68M2Hv1xFZH3TqW4"
             }
         }
     }

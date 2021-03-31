@@ -15,6 +15,11 @@ export interface Hero {
     roles: string[],
     legs: string
 }
+
+export interface responseOpenDota{
+    arr: Heroes
+}
+
 export interface NormalizedHeroes {
     id: number,
     name: string,
@@ -56,17 +61,22 @@ export class OpenDota {
             });
             // Cast to array because I cannot deal with this fucking object
             const herois = Object.values(objResponse.data);
+            // const herois = Object.values(objResponse.data);
             // Above casting its resulting an last position with null values - finalFormat[length] = NULL VALUES
             // Must check .normalizeData() to verify why its LOOP one extra position
             const finalFormat = this.normalizeData(herois)
             // -> So decided to .pop() and remove the last position before return it 
-            console.log(" - ", typeof(finalFormat[0]));
-            finalFormat.pop();
+
+            // finalFormat.pop();
+
             // return finalFormat;
+
+
+
             return this.normalizeData(herois);
 
         } catch (err) {
-            if (HTTPUtil.Request.isReqError(err)){
+            if (HTTPUtil.Request.isReqError(err)) {
                 throw new ClientResponseError(`Error: ${JSON.stringify(err.response.data)} Code: ${err.response.status}`
                 )
             }
