@@ -1,4 +1,5 @@
 import * as HTTPUtil from "@src/util/request"
+import { ClientRequestError, ClientResponseError } from "./OpenDota"
 import config, { IConfig } from "config";
 
 export interface Movie {
@@ -42,19 +43,18 @@ export interface NormalizedMovie {
 }
 const APIconfigResource: IConfig = config.get('App.resources.movieFlix')
 export class MoviesFlix {
-    constructor(protected request = new HTTPUtil.Request) {}
-
+    constructor(protected request = new HTTPUtil.Request()) {}
 
     public async fetchByName(name: string): Promise<NormalizedMovie[]>{
         const token =`${APIconfigResource.get('apiToken')}`;
         const url = `${APIconfigResource.get('apiUrl')}3/search/movie?query=${name}`;
-        const response = await this.request.getMovies<NetFloxReponse>(url, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-        const movies = this.normalizeData(response.data.results);
-        return movies;
+            const response = await this.request.getMovies<NetFloxReponse>(url, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            const movies = this.normalizeData(response.data.results);
+            return movies;
     }
 
 
@@ -73,7 +73,6 @@ export class MoviesFlix {
                 title: mov.title,
                 video: mov.video
             })));
-            
         return normalized;
 
     }

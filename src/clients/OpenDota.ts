@@ -28,6 +28,7 @@ export interface NormalizedHeroes {
 }
 
 // error handle classes
+// Internal error - didnt even reach to call external service
 export class ClientRequestError extends InternalError {
     constructor(message: string) {
         const internalMessage =
@@ -35,6 +36,7 @@ export class ClientRequestError extends InternalError {
         super(`${internalMessage}: ${message}`);
     }
 }
+// Error from External server
 export class ClientResponseError extends InternalError {
     constructor(message: string) {
         const internalMessage =
