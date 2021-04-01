@@ -40,7 +40,7 @@ export class ClientRequestError extends InternalError {
 export class ClientResponseError extends InternalError {
     constructor(message: string) {
         const internalMessage =
-            'Unexpected error returned by Dota API external service'
+            'Unexpected error returned by Movie API external service'
         super(`${internalMessage}: ${message}`);
     }
 }

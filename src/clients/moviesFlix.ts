@@ -48,6 +48,7 @@ export class MoviesFlix {
     public async fetchByName(name: string): Promise<NormalizedMovie[]>{
         const token =`${APIconfigResource.get('apiToken')}`;
         const url = `${APIconfigResource.get('apiUrl')}3/search/movie?query=${name}`;
+        try {
             const response = await this.request.getMovies<NetFloxReponse>(url, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -55,6 +56,14 @@ export class MoviesFlix {
             });
             const movies = this.normalizeData(response.data.results);
             return movies;
+        } catch (error) {
+            if (HTTPUtil.Request.isReqError(error)) {
+                throw new ClientResponseError(`Error: ${JSON.stringify(error.response.data)} Code: ${error.response.status}`)
+            }
+            throw new ClientRequestError(error.message);
+        }
+
+
     }
 
 

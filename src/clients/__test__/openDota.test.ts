@@ -37,8 +37,6 @@ describe('OpenDota client', () => {
 
 
     it('it should get ClientResponseError when Dota API services responds with error (404)', async () => {
-
-        // 
         mockedRequestClass.isReqError.mockReturnValue(true);
         mockedRequest.get.mockRejectedValue({
             response: {
@@ -49,7 +47,7 @@ describe('OpenDota client', () => {
 
         const openDota = new OpenDota(mockedRequest);
         await expect(openDota.try()).rejects.toThrow(
-            'Unexpected error returned by Dota API external service: Error: {"error":["Not found"]} Code: 404'
+            'Unexpected error returned by Movie API external service: Error: {"error":["Not found"]} Code: 404'
         );
     })
 
