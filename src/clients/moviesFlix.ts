@@ -3,7 +3,7 @@ import { ClientRequestError, ClientResponseError } from "./OpenDota"
 import config, { IConfig } from "config";
 
 export interface Movie {
-    adult: false,
+    adult: boolean,
     backdrop_path: string,
     genre_ids: [],
     id: number,
@@ -29,7 +29,7 @@ export interface NetFloxReponse{
 }
 // Removed rating (its changing by time) from original format may causes a fail test
 export interface NormalizedMovie {
-    adult: false,
+    adult: boolean,
     backdrop_path: string,
     genre_ids: [],
     id: number,
