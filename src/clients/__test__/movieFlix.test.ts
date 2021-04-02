@@ -10,7 +10,7 @@ describe('Movie Flix client - test', () => {
     // Instance call
     const mockedRequest = new HTTPUtil.Request() as jest.Mocked<HTTPUtil.Request>;
 
-    it('should return an movie depends by name search', async() => {
+    it('should return an movie depends by name search', async () => {
         const movieName = 'matrix';
         mockedRequest.getMovies.mockResolvedValue({
             data: allMovies
