@@ -15,7 +15,6 @@ describe('Movie Flix client - test', () => {
         mockedRequest.getMovies.mockResolvedValue({
             data: allMovies
         } as HTTPUtil.Response);
-
         const mFlix = new MoviesFlix(mockedRequest);
         const response = await mFlix.fetchByName(movieName);
         expect(response).toEqual(normalizedMovie);
@@ -24,18 +23,15 @@ describe('Movie Flix client - test', () => {
 
     it('should return error during requesting to external server (INTERNAL BACKEND ERR)', async() => {
         const mFlix = new MoviesFlix(mockedRequest);
-
         mockedRequest.getMovies.mockRejectedValue({
             message: 'Network error - Internal backend error'
         });
-
         await expect(mFlix.fetchByName('matrix')).rejects.toThrow(
             'Internal Error - Failed to request on external API: Network error');
     });
 
 
     it('should return error RESPONSE from external server', async() => {
-
         mockedRequestClass.isReqError.mockReturnValue(true);
         mockedRequest.getMovies.mockRejectedValue({
             response: {
@@ -43,7 +39,6 @@ describe('Movie Flix client - test', () => {
                 data: { error: ['Not found'] },
             }
         });
-
         const mFlix = new MoviesFlix(mockedRequest);
         await expect(mFlix.fetchByName('matrix')).rejects.toThrow(
             'Unexpected error returned by Movie API external service: Error: {"error":["Not found"]} Code: 404'

@@ -23,7 +23,7 @@ describe('Playlist maker test for service', () => {
             .mockResolvedValue(normalizedMovie);
         const organizer: Organizer[] = [{
             nameOrganizer: 'playlist-fake',
-            userId: 'any-id',
+            userId: 1,
             movieNameSearch: 'matrix'
         }];
         const playlistMaker = new PlayList();
@@ -44,7 +44,7 @@ describe('Playlist maker test for service', () => {
     it('shoul return ', async () => {
         const organizer: Organizer[] = [{
             nameOrganizer: 'playlist-fake',
-            userId: 'any-id',
+            userId: 1,
             movieNameSearch: 'matrix'
         }];
 

@@ -1,28 +1,52 @@
 import './util/module-alias';
 import { Server, Controller } from '@overnightjs/core';
 import bodyParser from 'body-parser';
-import { UserController } from './controllers/user';
 import { Application } from 'express';
 
+// database
+import Knex from 'knex';
+import knexConfig from '../knexfile';
+import { Model } from 'objection';
+import { PlayListController } from './controllers/playlist';
+
+
+
+const knex = Knex(knexConfig.development);
 export class SetupServer extends Server {
     constructor(private port = 3000) {
         super();
     }
 
-    public init(): void {
+    public async init(): Promise<void> {
         this.setupExpress();
-        this.setupController();
+        this.setupControllers();
+        await this.databaseSetup();
     }
 
-    // Express configuration setup
+    private async databaseSetup(): Promise<void> {
+        await Model.knex(knex);
+    }
+
+    public async close(): Promise<void> {
+        await knex.destroy();
+    }
+
     private setupExpress(): void {
         this.app.use(bodyParser.json());
     }
+    private setupControllers(): void {
 
-    private setupController(): void {
-        const userController = new UserController();
-        this.addControllers(userController);
+        const playListController = new PlayListController();
+        this.addControllers(playListController);
     }
+
+    public start(): void {
+
+        this.app.listen(this.port, () => {
+            console.log('Express in:', this.port,);
+        })
+    }
+
 
     public getApp(): Application {
         return this.app;

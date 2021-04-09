@@ -1,5 +1,9 @@
 {
     "App": {
+        "database": {
+            "mysqlUrl": "127.0.0.1",
+            "database": "movieflix"
+        },
         "resources": {
             "OpenDota": {
                 "apiUrl": "https://api.opendota.com/api/",

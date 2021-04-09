@@ -46,3 +46,17 @@
             // Instance call
             const mockedRequest = new HTTPUtil.Request() as jest.Mocked<HTTPUtil.Request>;
 
+
+------
+- Setup MYSQL + ObjectionJS(+ Knex);
+.mysql2 driver
+  - 1 um migration pra cada tabela 
+  - 2 nao to verificando se a table existe antes de fazer o insert <- care about this
+  - 3 //TODO : refactorar a configuracao do Knex e utilizar o config aliasing (verificar pq essa merda nao ta pegando)
+  - 4 // OBS  TESTING with test: Nao se faz teste de unidade para controllers - a ele fica responsavel apenas o test funcional (q é o responsavel por verificar um endpoint
+  - 5 models
+  - 6 relationship entre modulos
+  - 7 teste de funcionalidade - end point to end point
+
+------
+
