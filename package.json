@@ -13,7 +13,12 @@
     "test:func": "jest --projects ./test --runInBand",
     "test:unit": "jest",
     "style:check": "prettier --check 'src/**/*.ts' 'test/**/*.ts'",
-    "style:fix": "prettier --write 'src/**/*.ts' 'test/**/*.ts'"
+    "style:fix": "prettier --write 'src/**/*.ts' 'test/**/*.ts'",
+
+    "make:migration": "knex migrate:make migration_name",
+    "migrate": "knex migrate:latest",
+    "make:seed": "knex seed:make seed_name",
+    "seeding": "knex seed:run"
   },
   "repository": {
     "type": "git",
@@ -37,7 +42,10 @@
     "body-parser": "^1.19.0",
     "config": "^3.3.6",
     "express": "^4.17.1",
-    "module-alias": "^2.2.2"
+    "knex": "0.21.19",
+    "module-alias": "^2.2.2",
+    "mysql2": "^2.2.5",
+    "objection": "^2.2.15"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

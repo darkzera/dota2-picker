@@ -3,7 +3,7 @@ import { InternalError } from "@src/util/errors/internal-error";
 
 export interface Organizer {
     nameOrganizer: string,
-    userId: string,
+    userId: number,
     movieNameSearch: string,
 }
 
@@ -38,6 +38,7 @@ export class PlayList {
         } catch (error) {
             throw new ServiceProcessingError(error.message);
         }
+
     }
 
 
