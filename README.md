@@ -56,6 +56,7 @@
   - 4 // OBS  TESTING with test: Nao se faz teste de unidade para controllers - a ele fica responsavel apenas o test funcional (q é o responsavel por verificar um endpoint
   - 5 models
   - 6 relationship entre modulos
-  - 0
-  - 0
-  - 0
+  - 7 teste de funcionalidade - end point to end point
+
+------
+

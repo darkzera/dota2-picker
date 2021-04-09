@@ -5,4 +5,4 @@ import { SetupServer } from "./server";
     const server = new SetupServer();
     await server.init()
     server.start();
-})
+})();

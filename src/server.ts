@@ -42,8 +42,8 @@ export class SetupServer extends Server {
 
     public start(): void {
 
-        this.app.listen(this.app.get('port'), () => {
-            console.log('Express in:', this.app.get('port'));
+        this.app.listen(this.port, () => {
+            console.log('Express in:', this.port,);
         })
     }
 
