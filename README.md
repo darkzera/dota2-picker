@@ -60,4 +60,9 @@
   - 7 teste de funcionalidade - end point to end point
 
 ------
+- Hashing user & password
+  - 1 Updated tables, interface, migrations and seeding for taking email and password values
+  - 2 Creating User service to deal with hash password and verify this 
+  - 3 Using bcrypto module from NodeJS 
+  - 4 $beforeInsert (User Model) calling user service (#2)
 
