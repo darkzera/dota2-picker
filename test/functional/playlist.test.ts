@@ -19,7 +19,7 @@ describe('Playlists + organizer fi functional tests', () => {
             };
             console.log('Suposed to create Organizer like this: ', organizer);
             const { body, status } = await global.testRequest.post('/organizer').send(organizer);
-            expect(status).toBe(200);
+            expect(status).toBe(201);
             expect(body).toEqual(
                 expect.objectContaining(organizer)
             );
@@ -39,9 +39,6 @@ describe('Playlists + organizer fi functional tests', () => {
 
         });
 
-
-        // it.skip('some way to fail in 500 statment');
-
     });
 
     describe('it should load organizer from <User> and attach from external service', () => { 
@@ -54,9 +51,21 @@ describe('Playlists + organizer fi functional tests', () => {
             };
             const { body, status } = await global.testRequest.post('/organizer/loadOrgMovies').send(info);
             expect(status).toBe(200);
-            console.log(body);
 
         })
 
-    })
+        it.skip('shuold return error with client side error with validation failure', async () => {
+            const infoError = {
+                userId: 1,
+                name: 'Raphaelon',
+                token: 'token-cavernoso'
+            }
+            const { body, status } = await global.testRequest.post('/organizer/loadOrgMovies').send(infoError);
+            expect(status).toBe(401);
+            // console.log("=>" + body);
+            
+
+        })
+
+    });
 });

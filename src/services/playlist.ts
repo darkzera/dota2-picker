@@ -1,11 +1,12 @@
 import { MoviesFlix, NormalizedMovie } from "@src/clients/moviesFlix";
 import { InternalError } from "@src/util/errors/internal-error";
+import { Organizer } from "@src/util/interfaces/organizer";
 
-export interface Organizer {
-    nameOrganizer: string,
-    userId: number,
-    movieNameSearch: string,
-}
+// export interface Organizer {
+//     nameOrganizer: string,
+//     userId: number,
+//     movieNameSearch: string,
+// }
 
 export class ServiceProcessingError extends InternalError {
     constructor(message: string) {

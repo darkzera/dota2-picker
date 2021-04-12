@@ -1,15 +1,15 @@
 import './util/module-alias';
-import { Server, Controller } from '@overnightjs/core';
+import { Server } from '@overnightjs/core';
 import bodyParser from 'body-parser';
 import { Application } from 'express';
+// Controller
+import { PlayListController } from './controllers/playlist';
+import { UserController } from './controllers/user';
 
-// database
+// DB 
 import Knex from 'knex';
 import knexConfig from '../knexfile';
 import { Model } from 'objection';
-import { PlayListController } from './controllers/playlist';
-
-
 
 const knex = Knex(knexConfig.development);
 export class SetupServer extends Server {
@@ -25,6 +25,8 @@ export class SetupServer extends Server {
 
     private async databaseSetup(): Promise<void> {
         await Model.knex(knex);
+        console.log('DB is setup i guess?');
+        
     }
 
     public async close(): Promise<void> {
@@ -35,9 +37,12 @@ export class SetupServer extends Server {
         this.app.use(bodyParser.json());
     }
     private setupControllers(): void {
-
         const playListController = new PlayListController();
-        this.addControllers(playListController);
+        const userController = new UserController();
+        this.addControllers([
+                playListController,
+                userController
+            ]);
     }
 
     public start(): void {

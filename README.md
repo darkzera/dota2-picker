@@ -2,13 +2,14 @@
 
 # This is a repo to practice some concepts of nodejs api
 
-## Steps
+## Depend 
 - Module aliasing 
 - OvernightJS/core
-- eslinting
-- jest setup (testes de end points, funcionais)
-
-
+- Eslinting
+- Prettier
+- Jest setup (testes de end points, funcionais)
+- Super test
+- Axios (external service)
 
 
 

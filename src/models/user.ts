@@ -8,6 +8,9 @@ export default class User extends Model {
 
     static tableName = 'users';
 
+    get full(): string {
+        return this.id + ' ' + this.job_role;
+    }
     static jsonSchema = {
         type: 'object',
         required: ['name', 'job_role'],

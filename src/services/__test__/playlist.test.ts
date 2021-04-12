@@ -3,9 +3,9 @@ import normalizedMovie from "@test/fixtures/normalizedMovies.json"
 import expectedPlaylist from "@test/fixtures/expectedPlaylist.json"
 import { 
     PlayList, 
-    Organizer,
     ServiceProcessingError,
 } from "../playlist";
+import { Organizer } from "@src/util/interfaces/organizer";
 
 jest.mock('@src/clients/moviesFlix');
 describe('Playlist maker test for service', () => {
