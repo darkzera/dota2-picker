@@ -1,5 +1,4 @@
 import * as Knex from "knex";
-import { table } from "console";
 
 
 export async function up(knex: Knex): Promise<void> {
@@ -10,6 +9,8 @@ export async function up(knex: Knex): Promise<void> {
         table.increments('id').primary()
         table.string('name')
         table.string('job_role')
+        table.string('email')
+        table.string('password')
     })
 
 }

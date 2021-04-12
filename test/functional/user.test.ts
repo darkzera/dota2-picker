@@ -11,8 +11,8 @@ describe('User create functional testing', () => {
         const userAdd: UserInterface = {
             name: 'Inacio -fakeUser functional testing',
             job_role: 'functional tester',
-            // email: 'testing@mai.net',
-            // password: '123'
+            email: 'testing@mai.net',
+            password: 'pwdTesting'
         }
 
         const {
@@ -33,7 +33,9 @@ describe('User create functional testing', () => {
                 status
             } = await global.testRequest.post('/user/create').send({
                 name: 123,
-                job_role: 'Missing'
+                job_role: 'Missing',
+                email: 'get@toke.net',
+                password: 'ohmtest'
             });
             expect(status).toBe(400);
             expect(body).toEqual('name: should be string')
@@ -45,7 +47,9 @@ describe('User create functional testing', () => {
                 status
             } = await global.testRequest.post('/user/create').send({
                 name: 'testing-name',
-                job_role: 123
+                job_role: 123,
+                email: 'get@toke.net',
+                password: 'ohmtest'
             });
             expect(status).toBe(400);
             expect(body).toEqual('job_role: should be string')

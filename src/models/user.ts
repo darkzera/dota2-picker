@@ -1,16 +1,24 @@
 import { Model } from 'objection';
 import Organizer from './organizer';
+import { UserService } from '@src/services/user';
 
 export default class User extends Model {
     id!: number
     name!: string
     job_role!: string
+    email!: string
+    password!: string
 
     static tableName = 'users';
 
     get full(): string {
         return this.id + ' ' + this.job_role;
     }
+
+    $beforeInsert(): void{
+        this.password = UserService.hashPassword(this.password);
+    }
+
     static jsonSchema = {
         type: 'object',
         required: ['name', 'job_role'],
@@ -18,6 +26,8 @@ export default class User extends Model {
             id: { type: 'integer' },
             name: { type: 'string', minLength: 1, maxLength: 50 },
             job_role: { type: 'string', minLength: 1, maxLength: 20 },
+            email: { type: 'string', minLength: 1, maxLength: 30},
+            password: { type: 'string', minLength: 1, maxLength: 50},
         }
     }
 

@@ -10,10 +10,10 @@ export async function seed(knex: Knex): Promise<void> {
 
     // Inserts seed entries
     await knex("users").insert([
-        { id: 1, name: "Valderrama", job_role: "Devops" },
-        { id: 2, name: "Lucas", job_role: "React dev" },
-        { id: 3, name: "Rafael", job_role: "Java Backend" },
-        { id: 4, name: "Bessias", job_role: "C++ Backend" },
+        { id: 1, name: "Valderrama", job_role: "Devops", email: 'Valder@rama.net', password: '12345'},
+        { id: 2, name: "Lucas", job_role: "React dev", email: 'lucas@dot.com', password: 'sk333' },
+        { id: 3, name: "Rafael", job_role: "Java Backend", email: 'rafa@fael.com' , password: 'sik3344'},
+        { id: 4, name: "Bessias", job_role: "C++ Backend" , email: 'Jair@Bessi.com', password: '2998132' },
     ]);
 
 
