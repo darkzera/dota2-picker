@@ -10,6 +10,7 @@
 - Jest setup (testes de end points, funcionais)
 - Super test
 - Axios (external service)
+- Bcrypt
 
 
 
@@ -63,6 +64,19 @@
 - Hashing user & password
   - 1 Updated tables, interface, migrations and seeding for taking email and password values
   - 2 Creating User service to deal with hash password and verify this 
-  - 3 Using bcrypto module from NodeJS 
+  - 3 Using bcrypt module from NodeJS 
   - 4 $beforeInsert (User Model) calling user service (#2)
+
+
+
+
+    * 3 Had a lot issues while installing using bcrypt (+ @types/bcrypt)at start. and to solve:
+    > 
+        $ yarn remove bcrypt
+        $ yarn add bcrypt-nodejs (an old and descontinued package)
+        $ yarn remove bcrypt-nodejs
+        $ yarn add bcrypt 
+        $ yarn add -D @types/bcrypt
+
+
 

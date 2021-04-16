@@ -3,6 +3,7 @@ import { Request, Response} from "express";
 import User from "@src/models/user";
 import { UserInterface } from "@src/util/interfaces/user";
 import { ValidationError } from "objection";
+import { UserService } from "@src/services/user";
 @Controller('user')
 export class UserController {
 
@@ -26,6 +27,22 @@ export class UserController {
 
             return res.json(error + "No status provider - must implement this")
         }
-
     }
+
+    @Post('login')
+    public async login(req: Request, res:Response): Promise<Response> { 
+        try {
+            const userToLogin = await User.query().where('email', req.body.email);
+            
+            // const userToLogin = await User.query().where()
+            const pwd = await UserService.compareLiteralAndHashPassoword(req.body.password,userToLogin[0].pwdHashed)
+            
+   
+            return res.status(200);
+        }
+        catch (error) {
+            return res.status(400);
+        }
+    }
+
 }
