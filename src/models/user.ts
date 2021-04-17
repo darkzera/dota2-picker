@@ -11,8 +11,10 @@ export default class User extends Model {
 
     static tableName = 'users';
 
-    get full(): string {
-        return this.id + ' ' + this.job_role;
+    get publicData(): string {
+        return this.name+ " - "+ 
+            this.job_role+ " - "+ 
+            this.email 
     }
 
     get pwdHashed(): string {

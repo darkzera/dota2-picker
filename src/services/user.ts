@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import toHash from "bcrypt"
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+import jwt from 'jsonwebtoken';
+
 export class UserService { 
 
     public static hashPassword(pwd: string): string{
@@ -16,4 +18,11 @@ export class UserService {
         // return toHash.compareSync(literalPwd, hashedPwd);
         return toHash.compare(literalPwd, hashedPwd);
     }
+
+    public static generateToken(payload: object): string {  
+        return jwt.sign(payload, 'test-key', {
+            expiresIn: 10000
+        })
+    }
+
 }

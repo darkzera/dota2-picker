@@ -30,19 +30,24 @@ export class UserController {
     }
 
     @Post('login')
-    public async login(req: Request, res:Response): Promise<Response> { 
+    public async login(req: Request, res: Response): Promise<void> {
         try {
-            const userToLogin = await User.query().where('email', req.body.email);
-            
-            // const userToLogin = await User.query().where()
-            const pwd = await UserService.compareLiteralAndHashPassoword(req.body.password,userToLogin[0].pwdHashed)
-            
-   
-            return res.status(200);
+            const userFound = await User.query().where('email', req.body.email)
+            if (!userFound){
+                return;
+            }
+            if (!await UserService.compareLiteralAndHashPassoword(req.body.password, userFound[0].password)) {
+                return; 
+            }
+                const token = UserService.generateToken(userFound[0].toJSON())
+                res.status(200).json(token);
+
         }
         catch (error) {
-            return res.status(400);
+            throw new ErrorEvent(error);
         }
+
+
     }
 
 }

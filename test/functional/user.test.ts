@@ -1,6 +1,5 @@
 import { UserInterface } from "@src/util/interfaces/user";
 import User from "@src/models/user";
-import { UserService } from "@src/services/user";
 
 describe('User create functional testing', () => {
     beforeAll(async () => {
@@ -64,18 +63,24 @@ describe('User create functional testing', () => {
             expect(body).toEqual('job_role: should be string')
         });
     });
-});
 
-describe('User ... functional testing', () => {
-    // TODO
-    it('attempt to login', async() => { 
+    it.only('Should testing to authenticate', async () => {
         const {
             body,
             status
         } = await global.testRequest.post('/user/login').send({
-            email: 'testing@mai.net',
-            password: 'pwdTesting'
+            email: 'Jair@Bessit.com',
+            password: 'abracadabra'
         });
+        expect(status).toBe(200);
+        // expect(body).toEqual(
+        //     expect.objectContaining({token: expect.any(String)})
+        // );
+        
 
-    })
-})
+    });
+
+
+
+});
+

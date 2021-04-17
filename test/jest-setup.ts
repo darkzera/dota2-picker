@@ -10,6 +10,6 @@ beforeAll(async () => {
 
 afterAll(async () => {
     await server.close();
-    console.log('Server closed');
+    console.log('Server(DB) closed');
     
 });
