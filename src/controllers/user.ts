@@ -4,9 +4,10 @@ import User from "@src/models/user";
 import { UserInterface } from "@src/util/interfaces/user";
 import { ValidationError, NotFoundError } from "objection";
 import { UserService } from "@src/services/user";
+
+
 @Controller('user')
 export class UserController {
-
 
     @Post('create')
     public async createUser(req: Request, res:Response): Promise<Response> { 
@@ -30,22 +31,24 @@ export class UserController {
     }
 
     @Post('login')
-    public async login(req: Request, res: Response): Promise<void> {
+    public async login(req: Request, res: Response): Promise<Response> {
         try {
             const userFound = await User.query().where('email', req.body.email)
             if (!userFound[0]){
-                res.status(401).json('Not allowed. User not found')
+                return res.status(401).json('Not allowed. User not found')
             }
             if (!await UserService.compareLiteralAndHashPassoword(req.body.password, userFound[0].password)) {
-                res.status(401).json('Not allowed. Password didnt match')
+                return res.status(401).json('Not allowed. Password didnt match')
             }
                 const token = UserService.generateToken(userFound[0].toJSON())
-                res.status(200).json(token);
+                console.log(token);
+                return res.status(200).json(token);
 
         }
         catch (error) {
-            if (error instanceof NotFoundError)
-                throw new NotFoundError(error)
+            return res.status(500).send({
+                error
+            })
         }
 
 

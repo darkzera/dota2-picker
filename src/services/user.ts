@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import toHash from "bcrypt"
 import jwt from 'jsonwebtoken';
+import config, { IConfig } from 'config'
 
+const APIconfigResource: IConfig = config.get('App.resources.jsonToken')
 export class UserService { 
 
     public static hashPassword(pwd: string): string{
@@ -20,7 +22,8 @@ export class UserService {
     }
 
     public static generateToken(payload: object): string {  
-        return jwt.sign(payload, 'test-key', {
+        const token = `${APIconfigResource.get('jwt-secret-key')}`;
+        return jwt.sign(payload, token, {
             expiresIn: 10000
         })
     }
