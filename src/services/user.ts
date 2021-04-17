@@ -24,7 +24,7 @@ export class UserService {
     public static generateToken(payload: object): string {  
         const token = `${APIconfigResource.get('jwt-secret-key')}`;
         return jwt.sign(payload, token, {
-            expiresIn: 10000
+            expiresIn: 2000000
         })
     }
 
