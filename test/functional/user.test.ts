@@ -64,22 +64,43 @@ describe('User create functional testing', () => {
         });
     });
 
-    it.only('Should testing to authenticate', async () => {
+    it('Should sucessful return an valid token', async () => {
         const {
             body,
             status
         } = await global.testRequest.post('/user/login').send({
-            email: 'Jair@Bessit.com',
+            email: 'Jair@Bessi.com',
             password: 'abracadabra'
         });
         expect(status).toBe(200);
         // expect(body).toEqual(
         //     expect.objectContaining({token: expect.any(String)})
         // );
-        
-
     });
 
+    it('Should fail to get token by no USER FOUND', async () => {
+        const {
+            body,
+            status
+        } = await global.testRequest.post('/user/login').send({
+            email: 'shuldnt@exist.com',
+            password: 'abracadabra'
+        });
+        expect(status).toBe(401);
+        expect(body).toEqual('Not allowed. User not found');
+    })
+
+    it('Should fail to get token when user exist but PASSWORD did not match', async () => {
+        const {
+            body,
+            status
+        } = await global.testRequest.post('/user/login').send({
+            email: 'Jair@Bessi.com',
+            password: 'wrongPassword'
+        });
+        expect(status).toBe(401);
+        expect(body).toEqual('Not allowed. Password didnt match');
+    })
 
 
 });

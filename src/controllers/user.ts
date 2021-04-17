@@ -2,7 +2,7 @@ import { Controller, Post } from "@overnightjs/core";
 import { Request, Response} from "express";
 import User from "@src/models/user";
 import { UserInterface } from "@src/util/interfaces/user";
-import { ValidationError } from "objection";
+import { ValidationError, NotFoundError } from "objection";
 import { UserService } from "@src/services/user";
 @Controller('user')
 export class UserController {
@@ -33,18 +33,19 @@ export class UserController {
     public async login(req: Request, res: Response): Promise<void> {
         try {
             const userFound = await User.query().where('email', req.body.email)
-            if (!userFound){
-                return;
+            if (!userFound[0]){
+                res.status(401).json('Not allowed. User not found')
             }
             if (!await UserService.compareLiteralAndHashPassoword(req.body.password, userFound[0].password)) {
-                return; 
+                res.status(401).json('Not allowed. Password didnt match')
             }
                 const token = UserService.generateToken(userFound[0].toJSON())
                 res.status(200).json(token);
 
         }
         catch (error) {
-            throw new ErrorEvent(error);
+            if (error instanceof NotFoundError)
+                throw new NotFoundError(error)
         }
 
 
