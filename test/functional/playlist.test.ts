@@ -14,7 +14,7 @@ describe('Playlists + organizer fi functional tests', () => {
         it('should sucessfull create an organizer model', async () => {
             const organizer = {
                 nameOrganizer: 'playlist-fake',
-                userId: 1,
+                // userId: 1,
                 movieNameSearch: 'matrix'
             };
             console.log('Suposed to create Organizer like this: ', organizer);
@@ -45,7 +45,7 @@ describe('Playlists + organizer fi functional tests', () => {
 
         it('it should load organizer from <User> and attach into movies to return sucessfuly', async () => { 
             const info = { 
-                userId: 1,
+                // userId: 1,
                 name: 'Raphaelon',
                 token: 'token-cavernoso'
             };
@@ -56,15 +56,12 @@ describe('Playlists + organizer fi functional tests', () => {
 
         it.skip('shuold return error with client side error with validation failure', async () => {
             const infoError = {
-                userId: 1,
+                // userId: 1,
                 name: 'Raphaelon',
                 token: 'token-cavernoso'
             }
             const { body, status } = await global.testRequest.post('/organizer/loadOrgMovies').send(infoError);
             expect(status).toBe(401);
-            // console.log("=>" + body);
-            
-
         })
 
     });

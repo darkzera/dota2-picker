@@ -1,5 +1,6 @@
 import { Model } from "objection"
 import Organizer from "./organizer"
+import User from "./user"
 
 export default class OrganizerMovies extends Model {
 
@@ -21,10 +22,10 @@ export default class OrganizerMovies extends Model {
 
     static jsonSchema = {
         type: 'object',
-        required: ['id', 'idOrganizer'],
+        required: ['id', 'idOrganizer', 'ownerId'],
         properties: {
             id: { type: 'integer' },
-            organizerId: { type: 'integer' },
+            ownerId: { type: 'integer'},
             adult: { type: 'boolean' },
             backdrop_path: { type: 'string' },
             genre_ids: { type: 'string' },
@@ -48,6 +49,16 @@ export default class OrganizerMovies extends Model {
                 to: "organizers.id"
             },
         }
+
+        // ownerId: {
+        //     relation: Model.BelongsToOneRelation,
+        //     modelClass: User,
+        //     from: "organizersmovie.ownerId",
+        //     join: {
+        //         from: "organizersmovie.organizerId",
+        //         to: "organizers.id"
+        //     }
+        // }
 
     })
 
