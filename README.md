@@ -1,8 +1,14 @@
-# -picker
+# Im using README to take personal notes about my learning process (You can find english and portuguese comments here lol) 
 
 # This is a repo to practice some concepts of nodejs api
+- Learning TDD concepts
+- Automate unit and functional testing (Part of TDD methodology)
+- JWT 
+- Hashing password
+- Type injection 
 
-## Depend 
+
+## Dependencies
 - Module aliasing 
 - OvernightJS/core
 - Eslinting
@@ -11,8 +17,6 @@
 - Super test
 - Axios (external service)
 - Bcrypt
-
-
 
 ## Steps with notes that i may review
 - Setup a tsc project 
